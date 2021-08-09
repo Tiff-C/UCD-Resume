@@ -1,3 +1,8 @@
+/**
+ * 
+ * @param {takes the user name entered into #gh-username input on github.html} user 
+ * @returns the html code to be rendered in the #gh-user-data div to be consumed by the fetchGitHubInformation function.
+ */
 function userInformationHTML(user) {
   return `
     <h2>${user.name}
@@ -16,6 +21,11 @@ function userInformationHTML(user) {
 
 }
 
+/**
+ * 
+ * @param {when the user inputs a github username into the input box #gh-username-input} event 
+ * @returns the data returned from the github api, it also provides responses if an error is returned. It then renders the userInformationHTML and repoInformationHTML
+ */
 function fetchGitHubInformation(event) {
 
   let username = $('#gh-username').val();
