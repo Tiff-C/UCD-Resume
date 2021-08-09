@@ -1,7 +1,7 @@
 /**
  * 
- * @param {takes the user name entered into #gh-username input on github.html} user 
- * @returns the html code to be rendered in the #gh-user-data div to be consumed by the fetchGitHubInformation function.
+ * @param {user data returned from the github api} user 
+ * @returns the html code to be rendered in the #gh-user-data div.
  */
 function userInformationHTML(user) {
   return `
@@ -23,8 +23,37 @@ function userInformationHTML(user) {
 
 /**
  * 
+ * @param {The repos object returned from the github api} repos 
+ * @returns the html code to be rendered in the #gh-repo-data div.
+ */
+function repoInformationHTML(repos) {
+  if (repos.length === 0) {
+    return `<div class='clearfix repo-list'>No repos!</div>`
+  };
+  
+  let listItemsHTML = repos.map(function(repo) {
+    return `
+      <li>
+        <a href='${repo.html_url}'>${repo.name}</a>
+      </li>`;
+  });
+
+  return `
+    <div class='clearfix repo-list'>
+      <p>
+        <strong>Repo List:</strong>
+      </p>
+      <ul>
+        ${listItemsHTML.join('\n')}
+      </ul>
+    </div>`;
+}
+
+
+/**
+ * 
  * @param {when the user inputs a github username into the input box #gh-username-input} event 
- * @returns the data returned from the github api, it also provides responses if an error is returned. It then renders the userInformationHTML and repoInformationHTML
+ * @returns the data returned from the github api, it also provides responses if an error is returned. It then calls the  functions userInformationHTML and repoInformationHTML
  */
 function fetchGitHubInformation(event) {
 
@@ -61,3 +90,4 @@ function fetchGitHubInformation(event) {
       }
     });
 }
+
