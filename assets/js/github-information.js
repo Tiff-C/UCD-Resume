@@ -56,6 +56,9 @@ function repoInformationHTML(repos) {
  * @returns the data returned from the github api, it also provides responses if an error is returned. It then calls the  functions userInformationHTML and repoInformationHTML
  */
 function fetchGitHubInformation(event) {
+  
+  $('#gh-user-data').html('');
+  $('#gh-repo-data').html('');
 
   let username = $('#gh-username').val();
   
@@ -91,3 +94,4 @@ function fetchGitHubInformation(event) {
     });
 }
 
+$(document).ready(fetchGitHubInformation);
